@@ -1,0 +1,23 @@
+# Audio I/O
+sounddevice
+pyserial
+
+# STT
+lightning-whisper-mlx
+
+# TTS (voice clone via Qwen3-TTS)
+mlx-audio
+soundfile
+numpy
+
+# LLM
+ollama
+
+# Web Search
+duckduckgo-search
+
+# Resampling
+librosa
+
+# Config
+pyyaml

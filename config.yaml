@@ -1,0 +1,63 @@
+# AIOC Ham Radio Voice Chatbot — Configuration
+# Callsign: AK6MJ
+
+# --- Station ---
+callsign: "AK6MJ"
+id_interval_sec: 600          # FCC §97.119: identify every 10 minutes
+
+# --- AIOC Hardware ---
+aioc:
+  serial_port: auto            # auto-detect by VID:1209 PID:7388, or set explicit path
+  audio_device: "AllInOneCable" # substring match in sounddevice device list
+  sample_rate: 48000
+  channels: 1
+
+# --- VOX / Squelch Detection ---
+vox:
+  threshold_dbfs: -47          # RMS level to consider squelch open
+  hang_time_sec: 1.0           # silence after last above-threshold before ending recording
+  min_transmission_sec: 0.5    # ignore bursts shorter than this
+  max_transmission_sec: 120    # safety cap on recording length
+
+# --- STT (Speech-to-Text) ---
+stt:
+  model: "distil-medium.en"    # lightning-whisper-mlx model
+
+# --- LLM ---
+llm:
+  model: "qwen3:32b"
+  system_prompt: |
+    You are a helpful amateur radio operator responding on VHF FM.
+    Your callsign is {callsign}. Keep answers concise (1-3 sentences)
+    since they will be spoken over radio. Be friendly and conversational.
+    Do NOT include your callsign in responses — station identification
+    is handled automatically by separate equipment.
+    Never use profanity, obscenity, or indecent language.
+    Never discuss commercial products for sale or business transactions.
+    Never provide URLs, links, or email addresses.
+    Never use emojis or special characters — your output will be read
+    aloud by a text-to-speech system over radio.
+    NEVER guess specific numbers like frequencies, callsigns, or technical
+    specs. Only state a number if it appears in the search results provided
+    to you or you are absolutely certain. If unsure, say so. Getting a
+    frequency wrong on the air is embarrassing. Accuracy over confidence.
+  max_tokens: 200
+  temperature: 0.7
+
+# --- Web Search ---
+search:
+  enabled: true
+  max_results: 5
+
+# --- TTS (Voice Clone) ---
+tts:
+  model_id: "mlx-community/Qwen3-TTS-12Hz-0.6B-Base-bf16"
+  voice_profile_dir: "../voiceclone/voices/bb"
+  language: "English"
+  speed: 1.0
+  tone: 50                     # 0=formal, 100=conversational
+
+# --- Operational ---
+dry_run: false
+log_dir: "logs"
+log_transmissions: true
