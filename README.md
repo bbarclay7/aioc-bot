@@ -32,7 +32,7 @@ the AIOC cable, speaks, then unkeys and resumes listening.
 ## Hardware
 
 - **Radio**: Baofeng (or any HT with a Kenwood-style 2-pin connector)
-- **Interface**: [AIOC (All-In-One Cable)](https://github.com/skuber/AIOC) — USB
+- **Interface**: [AIOC (All-In-One Cable)](https://github.com/skuep/AIOC) — USB
   sound card + serial PTT in a single cable (VID `1209`, PID `7388`)
 - **Computer**: Mac with Apple Silicon (M1/M2/M3/M4) and 32GB+ RAM
   - The LLM (qwen3:32b) benefits from 64GB+; smaller models work with less
